@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HomePresenter} from '../../presenters/home.presenter';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,14 @@ export class HomeComponent implements OnInit {
   rate: any;
   isReadonly: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(public readonly homePresenter: HomePresenter) {
   }
 
+  ngOnInit(): void {
+    this.setPresenter();
+  }
+
+  setPresenter(): void {
+    this.homePresenter.setView(this);
+  }
 }

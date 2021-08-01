@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InjectorModule} from './presentation/injector/injector.module';
 import {HttpClientModule} from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {BreedsModule} from './presentation/shared/breeds/breeds.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,7 @@ import {BreedsModule} from './presentation/shared/breeds/breeds.module';
     BrowserAnimationsModule,
     InjectorModule,
     HttpClientModule,
-    NgSelectModule
+    NgSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
     if (typeof event === 'string') {
       await this.homePresenter.getListSubBreeds(event);
       if (this.homePresenter.subBreeds.length > 0) {
-        await this.router.navigate(['details']);
+        await this.router.navigate(['subbreeds']);
       } else {
         this.openModal();
       }

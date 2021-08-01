@@ -3,7 +3,6 @@ import {HomeComponent} from '../components/home/home.component';
 import {BaseView} from '../views/base.view';
 import {DogsUseCase} from '../../domain/usecases/DogsUseCase';
 import {FilterFavorite} from '../../domain/entity/FilterFavorite';
-import {ResponseFavoriteDTO} from '../../data/entity/ResponseFavoriteDTO';
 import {FavoriteDTO} from '../../data/entity/FavoriteDTO';
 import {BreedDTO} from '../../data/entity/BreedDTO';
 
@@ -14,11 +13,10 @@ import {BreedDTO} from '../../data/entity/BreedDTO';
 export class HomePresenter {
   private view: HomeComponent | undefined;
   private baseView: BaseView | undefined;
-  public title = 'Home Presenter';
   public favoriteDTO: FavoriteDTO = {};
-  public loadCard = false;
   public listBreeds: BreedDTO[] = [];
   public listSubBreeds: Array<string> = [];
+  public breedSelected: string;
 
   constructor(private readonly dogsUseCase: DogsUseCase) {
   }
@@ -87,6 +85,7 @@ export class HomePresenter {
 
   async getListSubBreeds(breed: string): Promise<void> {
     try {
+      this.breedSelected = breed;
       const result = await this.dogsUseCase.getListSubBreeds(breed);
       this.listSubBreeds = result.message;
     } catch (e) {

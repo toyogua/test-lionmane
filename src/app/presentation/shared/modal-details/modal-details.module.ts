@@ -8,4 +8,5 @@ import {CommonModule} from '@angular/common';
   exports: [ModalDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ModalDetailsModule {}
+export class ModalDetailsModule {
+}

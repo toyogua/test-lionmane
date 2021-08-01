@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SubbreedsRoutingModule } from './subbreeds-routing.module';
-import { SubbreedsComponent } from './subbreeds.component';
+import {SubbreedsRoutingModule} from './subbreeds-routing.module';
+import {SubbreedsComponent} from './subbreeds.component';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {ModalDetailsModule} from '../../shared/modal-details/modal-details.module';
-import {RatingModule} from 'ngx-bootstrap/rating';
+import {ModalFavoriteModule} from '../../shared/modal-favorite/modal-favorite.module';
 
 
 @NgModule({
@@ -16,8 +16,9 @@ import {RatingModule} from 'ngx-bootstrap/rating';
     CommonModule,
     SubbreedsRoutingModule,
     ModalDetailsModule,
-
+    ModalFavoriteModule
   ],
   providers: [BsModalService]
 })
-export class SubbreedsModule { }
+export class SubbreedsModule {
+}

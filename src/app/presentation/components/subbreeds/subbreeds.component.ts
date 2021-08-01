@@ -6,6 +6,7 @@ import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 import {Router} from '@angular/router';
 import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
 import {SaveFavorite} from '../../../domain/entity/SaveFavorite';
+import {ModalFavoriteComponent} from '../../shared/modal-favorite/modal-favorite.component';
 
 @Component({
   selector: 'app-subbreeds',
@@ -14,6 +15,9 @@ import {SaveFavorite} from '../../../domain/entity/SaveFavorite';
 })
 export class SubbreedsComponent implements OnInit {
   private bsModalRef: BsModalRef;
+  private bsModalRefFavorite: BsModalRef;
+  private existsFavorite: boolean;
+  private dogSelect: FilterFavorite;
 
   constructor(public readonly homePresenter: HomePresenter,
               public readonly subBreedsPresenter: SubBreedsPresenter,
@@ -23,6 +27,13 @@ export class SubbreedsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setPresenter();
+    this.validateExistsFavorite();
+  }
+
+  async validateExistsFavorite(): Promise<void> {
+    await this.subBreedsPresenter.existsFavorite().then((exits) => {
+      this.existsFavorite = exits;
+    });
   }
 
   setPresenter(): void {
@@ -37,6 +48,8 @@ export class SubbreedsComponent implements OnInit {
       subBreed: item,
       size: 5
     };
+    this.dogSelect = filter;
+    this.validateExistsFavorite();
     this.openModal(filter);
   }
 
@@ -46,7 +59,9 @@ export class SubbreedsComponent implements OnInit {
     const initialState = {
       list: [
         this.subBreedsPresenter.images,
-        this.homePresenter.favoriteDTO.details
+        this.homePresenter.favoriteDTO.details,
+        (this.existsFavorite ? this.subBreedsPresenter.favoriteSaved.breed === this.dogSelect.breed
+          && this.subBreedsPresenter.favoriteSaved.subbreed === this.dogSelect.subBreed : false)
       ]
     };
     const options: ModalOptions = {
@@ -56,14 +71,16 @@ export class SubbreedsComponent implements OnInit {
     this.bsModalRef.content.event.subscribe(
       (res) => {
         if (res) {
-          this.subBreedsPresenter.existsFavorite().then((result) => {
-            if (result) {
-              console.log('existe')
-            } else {
-              this.saveFavorite(filter);
-            }
-          });
-
+          if (this.existsFavorite) {
+            this.bsModalRefFavorite = this.bsModalService.show(ModalFavoriteComponent);
+            this.bsModalRefFavorite.content.event.subscribe((press) => {
+              if (press) {
+                this.saveFavorite(filter);
+              }
+            });
+          } else {
+            this.saveFavorite(filter);
+          }
         } else {
           this.subBreedsPresenter.removeFavorite();
         }

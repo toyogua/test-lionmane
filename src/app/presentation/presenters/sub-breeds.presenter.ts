@@ -14,6 +14,7 @@ export class SubBreedsPresenter {
   private baseView: BaseView;
   private listSubBreeds: Array<string> = [];
   private listImages: Array<string> = [];
+  public favoriteSaved: SaveFavorite;
 
   get subBreeds(): Array<string> {
     return this.listSubBreeds;
@@ -61,6 +62,7 @@ export class SubBreedsPresenter {
     try {
       const favorite = await this.dogsUseCase.existsFavorite();
       if (favorite) {
+        this.favoriteSaved = favorite;
         return true;
       } else {
         return false;

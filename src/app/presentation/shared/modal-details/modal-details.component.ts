@@ -16,7 +16,7 @@ export class ModalDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isFavorite = false;
+    this.isFavorite = this.list[2];
   }
 
   handleChange(): void {

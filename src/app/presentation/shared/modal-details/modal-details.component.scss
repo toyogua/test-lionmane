@@ -4,5 +4,19 @@
       color: #0275d8;
       font-size: 20px;
     }
+
+    &__title {
+      margin-left: 16px;
+      color: #0275d8;
+    }
+
+    &__icon {
+      margin-left: 16px;
+    }
   }
+}
+
+.btn-primary {
+  margin-bottom: 8px;
+  margin-left: 16px;
 }

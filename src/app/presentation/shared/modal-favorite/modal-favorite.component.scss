@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+.container{
+  margin-bottom: 16px;
+}

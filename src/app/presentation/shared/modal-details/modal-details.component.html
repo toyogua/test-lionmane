@@ -2,7 +2,7 @@
   <img [src]="item" class="card-img-top" alt="Sub Breeds">
 </div>
 <div class="details__favorite">
-  <p>{{'Make Favorite'}}</p>
+  <p class="details__favorite__title">{{'Make Favorite'}}</p>
   <div>
     <rating class="details__favorite__mark"
             (click)="handleChange()"
@@ -11,7 +11,7 @@
             [customTemplate]="tt">
     </rating>
     <ng-template #tt>
-      <button class="btn btn-{{ isFavorite ? 'warning' : 'default'}}">
+      <button class="details__favorite__icon btn btn-{{ isFavorite ? 'warning' : 'default'}}">
         {{isFavorite ? '&#9733;' : '&#9734;'}}
       </button>
     </ng-template>

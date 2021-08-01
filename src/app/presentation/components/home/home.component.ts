@@ -12,11 +12,9 @@ import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  rate: any;
-  isReadonly: any;
   bsModalRef: BsModalRef;
   isOpen: boolean;
-
+  existsFavorite: boolean;
   constructor(public readonly homePresenter: HomePresenter,
               public readonly subBreedsPresenter: SubBreedsPresenter,
               private readonly bsModalService: BsModalService,
@@ -35,12 +33,24 @@ export class HomeComponent implements OnInit {
 
   async init(): Promise<void> {
     this.isOpen = true;
-    const filter: FilterFavorite = {
-      breed: 'hound',
-      subBreed: 'afghan'
-    };
-    await this.homePresenter.getFavorite(filter);
-    await this.homePresenter.getDetailFavorite(filter);
+    await this.subBreedsPresenter.existsFavorite().then((exists) => {
+      if (exists) {
+        this.existsFavorite = true;
+        const filter: FilterFavorite = {
+          breed: this.subBreedsPresenter.favoriteSaved.breed,
+          subBreed: this.subBreedsPresenter.favoriteSaved.subbreed
+        };
+        this.homePresenter.getFavorite(filter);
+        this.homePresenter.getDetailFavorite(filter);
+      } else {
+        const filter: FilterFavorite = {
+          breed: 'hound',
+          subBreed: 'afghan'
+        };
+        this.homePresenter.getFavorite(filter);
+        this.homePresenter.getDetailFavorite(filter);
+      }
+    });
     await this.homePresenter.getListBreeds();
   }
 

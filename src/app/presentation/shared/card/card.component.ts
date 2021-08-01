@@ -11,6 +11,8 @@ export class CardComponent implements OnInit {
   image!: string | undefined;
   @Input()
   details!: string | undefined;
+  @Input()
+  isFavorite: boolean;
 
   constructor() {
   }

@@ -1,9 +1,10 @@
 <div class="home">
   <div class="home__favorite">
-    <h4>{{'Your Favorite'}}</h4>
+    <h4 *ngIf="existsFavorite">{{'Your Favorite'}}</h4>
     <app-card
       [image]="homePresenter?.favorite?.image"
-      [details]="homePresenter.favorite.details">
+      [details]="homePresenter.favorite.details"
+      [isFavorite]="existsFavorite">
     </app-card>
   </div>
   <div class="home__breeds">

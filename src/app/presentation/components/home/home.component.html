@@ -9,7 +9,7 @@
   <div class="home__breeds">
     <h4>{{'Breeds'}}</h4>
     <app-breeds
-      [items]="homePresenter?.listBreeds"
+      [items]="homePresenter?.breeds"
       [isOpen]="isOpen"
       (selected)="changeBreed($event)">
     </app-breeds>

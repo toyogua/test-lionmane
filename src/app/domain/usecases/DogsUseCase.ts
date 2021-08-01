@@ -45,4 +45,12 @@ export class DogsUseCase {
         .subscribe(resolve, reject);
     });
   }
+
+  getListImages(filter: FilterFavorite): Promise<ResponseListSubBreedsDTO> {
+    return new Promise<ResponseListSubBreedsDTO>((resolve, reject) => {
+      this.dogsRepository
+        .listImages(filter)
+        .subscribe(resolve, reject);
+    });
+  }
 }

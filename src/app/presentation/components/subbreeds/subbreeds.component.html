@@ -1,4 +1,4 @@
 <h1>{{'Sub Breeds for'}} {{homePresenter.breedSelected}}</h1>
 <div class="list-group" *ngFor="let item of homePresenter.subBreeds">
-  <a (click)="handleClick($event)" href="#" class="list-group-item list-group-item-action">{{item}}</a>
+  <a (click)="handleClick($event, item)" href="#" class="list-group-item list-group-item-action">{{item}}</a>
 </div>

@@ -1,9 +1,9 @@
-
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+<div *ngFor="let item of list[0]" class="card">
+  <img [src]="item" class="card-img-top" alt="Sub Breeds">
 </div>
+<div class="card-body">
+  <h5 class="card-title">Details:</h5>
+  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+    content.</p>
+</div>
+<button class="btn btn-primary" (click)="bsModalRef.hide()">Close</button>

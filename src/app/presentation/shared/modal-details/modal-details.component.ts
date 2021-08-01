@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-modal-details',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-details.component.scss']
 })
 export class ModalDetailsComponent implements OnInit {
-
-  constructor() { }
+  list: any[] = [];
+  constructor(public readonly bsModalRef: BsModalRef) {
+  }
 
   ngOnInit(): void {
   }

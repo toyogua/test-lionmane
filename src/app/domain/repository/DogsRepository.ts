@@ -11,6 +11,7 @@ export interface DogsRepository {
   saveFavorite: () => Observable<unknown>;
   getFavoriteDetail: (filter: FilterFavorite) => Observable<ResponseFavoriteDTO>;
   listSubBreeds: (breed: string) => Observable<ResponseListSubBreedsDTO>;
+  listImages: (filter: FilterFavorite) => Observable<ResponseListSubBreedsDTO>;
 }
 
 export const DOGS_REPOSITORY = new InjectionToken('DogsRepository');

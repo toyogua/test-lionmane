@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HomePresenter} from '../../presenters/home.presenter';
-import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {ModalDetailsComponent} from '../../shared/modal-details/modal-details.component';
+import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 
 @Component({
   selector: 'app-subbreeds',
@@ -22,12 +23,26 @@ export class SubbreedsComponent implements OnInit {
     this.homePresenter.setView(this);
   }
 
-  handleClick(e: any): void {
+  handleClick(e: any, item: string): void {
     e.preventDefault();
-    this.openModal();
+    const filter: FilterFavorite = {
+      breed: this.homePresenter.breedSelected,
+      subBreed: item,
+      size: 5
+    };
+    this.openModal(filter);
   }
 
-  openModal(): void {
-    this.bsModalService.show(ModalDetailsComponent);
+  async openModal(filter: FilterFavorite): Promise<void> {
+    await this.homePresenter.getListImages(filter);
+    const initialState = {
+      list: [
+        this.homePresenter.images
+      ]
+    };
+    const options: ModalOptions = {
+      initialState
+    };
+    this.bsModalService.show(ModalDetailsComponent, options);
   }
 }

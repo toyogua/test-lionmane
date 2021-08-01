@@ -41,4 +41,10 @@ export class DogsRepositoryImpl implements DogsRepository {
       `${this.apiService.REMOTE_END_POINTS.URL_GET_SUB_BREED}/${breed}/list`
     );
   }
+
+  listImages(filter: FilterFavorite): Observable<ResponseListSubBreedsDTO> {
+    return this.http.get<ResponseListSubBreedsDTO>(
+      `${this.apiService.REMOTE_END_POINTS.URL_GET_SUB_BREED}/${filter.breed}/${filter.subBreed}/images/random/${filter.size}`
+    );
+  }
 }

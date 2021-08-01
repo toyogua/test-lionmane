@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SubbreedsRoutingModule } from './subbreeds-routing.module';
 import { SubbreedsComponent } from './subbreeds.component';
 import {BsModalService} from 'ngx-bootstrap/modal';
+import {ModalDetailsModule} from '../../shared/modal-details/modal-details.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {BsModalService} from 'ngx-bootstrap/modal';
   ],
   imports: [
     CommonModule,
-    SubbreedsRoutingModule
+    SubbreedsRoutingModule,
+    ModalDetailsModule
   ],
   providers: [BsModalService]
 })

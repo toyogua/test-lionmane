@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {HomePresenter} from '../../presenters/home.presenter';
-import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {ModalDetailsComponent} from '../../shared/modal-details/modal-details.component';
 import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 import {Router} from '@angular/router';
 import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
+import {SaveFavorite} from '../../../domain/entity/SaveFavorite';
 
 @Component({
   selector: 'app-subbreeds',
@@ -12,6 +13,7 @@ import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
   styleUrls: ['./subbreeds.component.scss']
 })
 export class SubbreedsComponent implements OnInit {
+  private bsModalRef: BsModalRef;
 
   constructor(public readonly homePresenter: HomePresenter,
               public readonly subBreedsPresenter: SubBreedsPresenter,
@@ -50,7 +52,31 @@ export class SubbreedsComponent implements OnInit {
     const options: ModalOptions = {
       initialState
     };
-    this.bsModalService.show(ModalDetailsComponent, options);
+    this.bsModalRef = this.bsModalService.show(ModalDetailsComponent, options);
+    this.bsModalRef.content.event.subscribe(
+      (res) => {
+        if (res) {
+          this.subBreedsPresenter.existsFavorite().then((result) => {
+            if (result) {
+              console.log('existe')
+            } else {
+              this.saveFavorite(filter);
+            }
+          });
+
+        } else {
+          this.subBreedsPresenter.removeFavorite();
+        }
+      }
+    );
+  }
+
+  async saveFavorite(filter: FilterFavorite): Promise<void> {
+    const favorite: SaveFavorite = {
+      breed: filter.breed,
+      subbreed: filter.subBreed
+    };
+    await this.subBreedsPresenter.saveFavorite(favorite);
   }
 
   goHome(): void {

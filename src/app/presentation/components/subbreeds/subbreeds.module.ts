@@ -16,7 +16,7 @@ import {RatingModule} from 'ngx-bootstrap/rating';
     CommonModule,
     SubbreedsRoutingModule,
     ModalDetailsModule,
-    RatingModule.forRoot(),
+
   ],
   providers: [BsModalService]
 })

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
@@ -8,11 +8,23 @@ import {BsModalRef} from 'ngx-bootstrap/modal';
 })
 export class ModalDetailsComponent implements OnInit {
   list: any[] = [];
+  rate: any;
+  isFavorite: boolean;
+  private event: EventEmitter<boolean> = new EventEmitter();
+
   constructor(public readonly bsModalRef: BsModalRef) {
   }
 
   ngOnInit(): void {
-    console.log(this.list)
+    this.isFavorite = false;
   }
 
+  handleChange(): void {
+    this.isFavorite = !this.isFavorite;
+    this.triggerEvent(this.isFavorite);
+  }
+
+  triggerEvent(state: boolean): void {
+    this.event.emit(state);
+  }
 }

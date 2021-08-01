@@ -4,6 +4,7 @@ import {FilterFavorite} from '../entity/FilterFavorite';
 import {ResponseFavoriteDTO} from '../../data/entity/ResponseFavoriteDTO';
 import {ResponseListBreedsDTO} from '../../data/entity/ResponseListBreedsDTO';
 import {ResponseListSubBreedsDTO} from '../../data/entity/ResponseListSubBreedsDTO';
+import {SaveFavorite} from '../entity/SaveFavorite';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,30 @@ export class DogsUseCase {
     return new Promise<ResponseListSubBreedsDTO>((resolve, reject) => {
       this.dogsRepository
         .listImages(filter)
+        .subscribe(resolve, reject);
+    });
+  }
+
+  saveFavorite(favorite: SaveFavorite): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.dogsRepository
+        .saveFavorite(favorite)
+        .subscribe(resolve, reject);
+    });
+  }
+
+  existsFavorite(): Promise<SaveFavorite> {
+    return new Promise<SaveFavorite>((resolve, reject) => {
+      this.dogsRepository
+        .existsFavorite()
+        .subscribe(resolve, reject);
+    });
+  }
+
+  removeFavorite(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.dogsRepository
+        .removeFavorite()
         .subscribe(resolve, reject);
     });
   }

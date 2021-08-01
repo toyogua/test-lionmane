@@ -1,6 +1,23 @@
 <div *ngFor="let item of list[0]" class="card">
   <img [src]="item" class="card-img-top" alt="Sub Breeds">
 </div>
+<div class="details__favorite">
+  <p>{{'Make Favorite'}}</p>
+  <div>
+    <rating class="details__favorite__mark"
+            (click)="handleChange()"
+            [max]="1"
+            [(ngModel)]="rate"
+            [customTemplate]="tt">
+    </rating>
+    <ng-template #tt>
+      <button class="btn btn-{{ isFavorite ? 'warning' : 'default'}}">
+        {{isFavorite ? '&#9733;' : '&#9734;'}}
+      </button>
+    </ng-template>
+  </div>
+</div>
+
 <div class="card-body">
   <h5 class="card-title">Details:</h5>
   <p class="card-text">{{list[1]}}</p>

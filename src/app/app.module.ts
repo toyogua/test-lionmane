@@ -6,17 +6,20 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InjectorModule} from './presentation/injector/injector.module';
 import {HttpClientModule} from '@angular/common/http';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {BreedsModule} from './presentation/shared/breeds/breeds.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     InjectorModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

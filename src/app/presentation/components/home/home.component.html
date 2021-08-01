@@ -10,6 +10,7 @@
     <h4>{{'Breeds'}}</h4>
     <app-breeds
       [items]="homePresenter?.listBreeds"
+      [isOpen]="isOpen"
       (selected)="changeBreed($event)">
     </app-breeds>
   </div>

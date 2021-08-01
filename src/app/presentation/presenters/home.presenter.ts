@@ -18,6 +18,7 @@ export class HomePresenter {
   public favoriteDTO: FavoriteDTO = {};
   public loadCard = false;
   public listBreeds: BreedDTO[] = [];
+  public listSubBreeds: Array<string> = [];
 
   constructor(private readonly dogsUseCase: DogsUseCase) {
   }
@@ -28,6 +29,10 @@ export class HomePresenter {
 
   get breeds(): BreedDTO[] {
     return this.listBreeds;
+  }
+
+  get subBreeds(): Array<string> {
+    return this.listSubBreeds;
   }
 
   setView(component: any): void {
@@ -83,7 +88,7 @@ export class HomePresenter {
   async getListSubBreeds(breed: string): Promise<void> {
     try {
       const result = await this.dogsUseCase.getListSubBreeds(breed);
-      console.log(result);
+      this.listSubBreeds = result.message;
     } catch (e) {
       console.log(e);
     }

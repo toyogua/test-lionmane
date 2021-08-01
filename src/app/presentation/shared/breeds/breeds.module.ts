@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BreedsComponent} from './breeds.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
@@ -11,7 +11,8 @@ import {CommonModule} from '@angular/common';
     FormsModule,
     CommonModule
   ],
-  exports: [BreedsComponent]
+  exports: [BreedsComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class BreedsModule {}

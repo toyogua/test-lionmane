@@ -8,6 +8,8 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 export class BreedsComponent implements OnInit {
   @Input()
   items!: any[];
+  @Input()
+  isOpen: boolean;
   @Output()
   selected = new EventEmitter<string>();
 

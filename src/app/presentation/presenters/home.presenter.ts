@@ -14,8 +14,6 @@ export class HomePresenter {
   private view: HomeComponent | undefined;
   private baseView: BaseView | undefined;
   private listBreeds: BreedDTO[] = [];
-  private listSubBreeds: Array<string> = [];
-  private listImages: Array<string> = [];
   public breedSelected: string;
   public favoriteDTO: FavoriteDTO = {};
 
@@ -30,13 +28,6 @@ export class HomePresenter {
     return this.listBreeds;
   }
 
-  get subBreeds(): Array<string> {
-    return this.listSubBreeds;
-  }
-
-  get images(): Array<string> {
-    return this.listImages;
-  }
 
   setView(component: any): void {
     this.view = component as HomeComponent;
@@ -62,6 +53,7 @@ export class HomePresenter {
       }
     } catch (e) {
       console.log(e);
+      this.favoriteDTO.details = e.error.message;
     }
   }
 
@@ -88,22 +80,4 @@ export class HomePresenter {
     });
   }
 
-  async getListSubBreeds(breed: string): Promise<void> {
-    try {
-      this.breedSelected = breed;
-      const result = await this.dogsUseCase.getListSubBreeds(breed);
-      this.listSubBreeds = result.message;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async getListImages(filter: FilterFavorite): Promise<void> {
-    try {
-      const result = await this.dogsUseCase.getListImages(filter);
-      this.listImages = result.message;
-    } catch (e) {
-      console.log(e);
-    }
-  }
 }

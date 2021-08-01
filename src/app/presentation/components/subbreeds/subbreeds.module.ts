@@ -5,6 +5,7 @@ import { SubbreedsRoutingModule } from './subbreeds-routing.module';
 import { SubbreedsComponent } from './subbreeds.component';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {ModalDetailsModule} from '../../shared/modal-details/modal-details.module';
+import {RatingModule} from 'ngx-bootstrap/rating';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {ModalDetailsModule} from '../../shared/modal-details/modal-details.modul
   imports: [
     CommonModule,
     SubbreedsRoutingModule,
-    ModalDetailsModule
+    ModalDetailsModule,
+    RatingModule.forRoot(),
   ],
   providers: [BsModalService]
 })

@@ -3,6 +3,8 @@ import {HomePresenter} from '../../presenters/home.presenter';
 import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {ModalDetailsComponent} from '../../shared/modal-details/modal-details.component';
 import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
+import {Router} from '@angular/router';
+import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
 
 @Component({
   selector: 'app-subbreeds',
@@ -12,7 +14,9 @@ import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 export class SubbreedsComponent implements OnInit {
 
   constructor(public readonly homePresenter: HomePresenter,
-              private readonly bsModalService: BsModalService) {
+              public readonly subBreedsPresenter: SubBreedsPresenter,
+              private readonly bsModalService: BsModalService,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -21,6 +25,7 @@ export class SubbreedsComponent implements OnInit {
 
   setPresenter(): void {
     this.homePresenter.setView(this);
+    this.subBreedsPresenter.setView(this);
   }
 
   handleClick(e: any, item: string): void {
@@ -34,15 +39,21 @@ export class SubbreedsComponent implements OnInit {
   }
 
   async openModal(filter: FilterFavorite): Promise<void> {
-    await this.homePresenter.getListImages(filter);
+    await this.subBreedsPresenter.getListImages(filter);
+    await this.homePresenter.getDetailFavorite(filter);
     const initialState = {
       list: [
-        this.homePresenter.images
+        this.subBreedsPresenter.images,
+        this.homePresenter.favoriteDTO.details
       ]
     };
     const options: ModalOptions = {
       initialState
     };
     this.bsModalService.show(ModalDetailsComponent, options);
+  }
+
+  goHome(): void {
+    this.router.navigate(['home']);
   }
 }

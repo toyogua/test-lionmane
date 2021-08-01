@@ -4,6 +4,7 @@ import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {ModalSubbreedsComponent} from '../../shared/modal-subbreeds/modal-subbreeds.component';
 import {Router} from '@angular/router';
+import {SubBreedsPresenter} from '../../presenters/sub-breeds.presenter';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   isOpen: boolean;
 
   constructor(public readonly homePresenter: HomePresenter,
+              public readonly subBreedsPresenter: SubBreedsPresenter,
               private readonly bsModalService: BsModalService,
               private readonly router: Router) {
   }
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit {
 
   setPresenter(): void {
     this.homePresenter.setView(this);
+    this.subBreedsPresenter.setView(this);
   }
 
   async init(): Promise<void> {
@@ -43,8 +46,9 @@ export class HomeComponent implements OnInit {
 
   async changeBreed(event: string): Promise<void> {
     if (typeof event === 'string') {
-      await this.homePresenter.getListSubBreeds(event);
-      if (this.homePresenter.subBreeds.length > 0) {
+      this.homePresenter.breedSelected = event;
+      await this.subBreedsPresenter.getListSubBreeds(event);
+      if (this.subBreedsPresenter.subBreeds.length > 0) {
         await this.router.navigate(['subbreeds']);
       } else {
         this.openModal();

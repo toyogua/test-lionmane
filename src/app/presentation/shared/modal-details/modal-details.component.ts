@@ -12,6 +12,7 @@ export class ModalDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.list)
   }
 
 }

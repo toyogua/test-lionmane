@@ -3,8 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
-
-import {RatingModule} from 'ngx-bootstrap/rating';
 import {FormsModule} from '@angular/forms';
 import {CardModule} from '../../shared/card/card.module';
 import {BreedsModule} from '../../shared/breeds/breeds.module';
@@ -17,7 +15,6 @@ import {BsModalService} from 'ngx-bootstrap/modal';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    RatingModule.forRoot(),
     FormsModule,
     CardModule,
     BreedsModule

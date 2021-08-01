@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HomePresenter} from '../../presenters/home.presenter';
+import {FilterFavorite} from '../../../domain/entity/FilterFavorite';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,26 @@ export class HomeComponent implements OnInit {
   constructor(public readonly homePresenter: HomePresenter) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.setPresenter();
+    await this.init();
   }
 
   setPresenter(): void {
     this.homePresenter.setView(this);
+  }
+
+  async init(): Promise<void> {
+    const filter: FilterFavorite = {
+      breed: 'hound',
+      subBreed: 'afghan'
+    };
+    await this.homePresenter.getFavorite(filter);
+    await this.homePresenter.getDetailFavorite(filter);
+    await this.homePresenter.getListBreeds();
+  }
+
+  async changeBreed(event: string): Promise<void> {
+    await this.homePresenter.getListSubBreeds(event);
   }
 }

@@ -1,5 +1,9 @@
 .home{
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 24px;
+  &__breeds{
+    width: 50%;
+    margin-left: 16px;
+  }
 }

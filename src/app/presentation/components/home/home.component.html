@@ -1,5 +1,17 @@
 <div class="home">
-  <h1>{{homePresenter.title}}</h1>
-  <app-card></app-card>
+  <div class="home__favorite">
+    <h4>{{'Your Favorite'}}</h4>
+    <app-card
+      [image]="homePresenter?.favorite?.image"
+      [details]="homePresenter.favorite.details">
+    </app-card>
+  </div>
+  <div class="home__breeds">
+    <h4>{{'Breeds'}}</h4>
+    <app-breeds
+      [items]="homePresenter?.listBreeds"
+      (selected)="changeBreed($event)">
+    </app-breeds>
+  </div>
 </div>
 

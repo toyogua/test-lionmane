@@ -7,16 +7,18 @@ import { HomeComponent } from './home.component';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import {FormsModule} from '@angular/forms';
 import {CardModule} from '../../shared/card/card.module';
+import {BreedsModule} from '../../shared/breeds/breeds.module';
 @NgModule({
   declarations: [
     HomeComponent
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    RatingModule.forRoot(),
-    FormsModule,
-    CardModule
-  ]
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        RatingModule.forRoot(),
+        FormsModule,
+        CardModule,
+        BreedsModule
+    ]
 })
 export class HomeModule { }
